@@ -38,7 +38,7 @@ You will implement 1D range tree first, and then generalized it to 2D.
 
 
 ```java
-Build 1D Range Tree
+Build 1D Range Tree (20%)
 
 Input: A set P of 1-D points on a line.
 Output: The root of 1-D range tree.
@@ -70,7 +70,7 @@ Node Build1DRangeTree(P)
 ```
 
  ```java
-//Goal: Finding the split node for a given range for a given tree
+//Goal: Finding the split node for a given range for a given tree (10%)
 
 //Input: Two values x and x' with x <= x'
 //Output: The node v where the paths to x and x' splits, or the leaf where both paths end.
@@ -89,6 +89,7 @@ FindSplitNode(x, x')
 ```
 
 ```java
+//1D Range Search (25%)
 //Input: A range tree T and a range [x:x']
 //Output: All points that lie in the range.
 
@@ -148,7 +149,7 @@ We can perform the 2D range query similarly by only visiting the associated bina
 ### Pseudo code for 2D Range search
 
 ```java
-Build 2D Range Tree
+Build 2D Range Tree (20%)
 
 Input: A set P of 2-D points on the plane.
 Output: The root of 2-D range tree.
@@ -182,7 +183,7 @@ Node Build2DRangeTree(P)
 ```
 
 ```java
-2D Range Search
+2D Range Search (25%)
 
 Input: A range R=[x:x', y:y']
 Output: All points that lie in the range.
