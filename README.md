@@ -334,11 +334,14 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 ```
+2. Add private methods and private data
 
 ### You cannot 
 1. Make your program part of a package.
 2. Import any additional libraries/packages
 3. Copy code from your text book _Data Structures and Problem Solving Using Java_, 4th Edition by _Mark A. Weiss_
+4. Add public methods or public data
+5. Change any given methods and data prototype
 
 ## Submission Instructions
 - Use the cloud or some other server to backup your code!
