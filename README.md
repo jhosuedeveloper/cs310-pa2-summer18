@@ -33,15 +33,15 @@ Searching in a range tree requires you to determine the split node where the pat
 
 <img src="https://cs.gmu.edu/~jmlien/teaching/cs310/uploads/Site/1Dsearch.png" width="600">
 
-### Pseudo code for 1D Range search
+### Pseudo code for 1D Range search (55%)
 You will implement 1D range tree first, and then generalized it to 2D.
 
 
 ```java
-Build 1D Range Tree (20%)
+//Build 1D Range Tree (20%)
 
-Input: A set P of 1-D points on a line.
-Output: The root of 1-D range tree.
+//Input: A set P of 1-D points on a line.
+//Output: The root of 1-D range tree.
 
 Node Build1DRangeTree(P)
 {
@@ -132,7 +132,7 @@ RangeSearch_1D(x,x')
 ```
 
 
-### 2D Range search
+### 2D Range search (45%)
 
 An example of a 2D range tree is shown below. 2D Range tree has two levels
 
