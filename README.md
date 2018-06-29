@@ -21,7 +21,7 @@ This picture shows an example of 2D range search.
 
 ## Introduction and Definitions
 
-### 1D Range search
+### 1D Range search (55%)
 1D range tree is basically a balanced binary search tree.
 
 - The leaves of the tree store the points.
@@ -33,7 +33,7 @@ Searching in a range tree requires you to determine the split node where the pat
 
 <img src="https://cs.gmu.edu/~jmlien/teaching/cs310/uploads/Site/1Dsearch.png" width="600">
 
-### Pseudo code for 1D Range search (55%)
+### Pseudo code for 1D Range search 
 You will implement 1D range tree first, and then generalized it to 2D.
 
 
@@ -305,7 +305,14 @@ bye
 
 ## Tasks
 
-
+- 1D Range search (55%)
+	- Build 1D Range Tree (20%)
+	- Find the split node (10%)
+	- 1D Range Search (25%)
+- 2D Range search (45%)
+	- Build 2D Range Tree (20%)
+	- 1D Range Search (25%)
+	
 ## Rules
 
 ### You must
