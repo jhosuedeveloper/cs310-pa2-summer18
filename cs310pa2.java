@@ -38,6 +38,7 @@ public class cs310pa2
         {
           Scanner scanner = new Scanner(new File(args[0]));
           Point2D [] data=readPoints(scanner);
+          System.out.println("Read in "+data.length+" points");
 
           //create the tree
           RangeTree2D<Point2D> rt = new RangeTree2D<Point2D>(
@@ -52,7 +53,7 @@ public class cs310pa2
             Double yMin = scanner.nextDouble();
             Double yMax = scanner.nextDouble();
 
-            System.out.println("\nQuery: "+xMin+" "+xMax+" "+yMin+" "+yMax);
+            System.out.println("Query: "+xMin+" "+xMax+" "+yMin+" "+yMax);
 
             //make a query
             IterableLinkedList<Point2D> result = rt.Search2D(new Point2D(xMin,yMin), new Point2D(xMax,yMax) );
@@ -65,7 +66,7 @@ public class cs310pa2
             //print results
             System.out.print("Found "+result.size()+" point");
             if(result.size()>1) System.out.print("s");
-            System.out.print("\n");
+            System.out.println("\n");
 
             for(Point2D v : result)
             {
@@ -74,7 +75,7 @@ public class cs310pa2
           }//end while
 
           //done
-          System.out.println("\nQuery:  exit\nbye");
+          System.out.println("Query:  exit\nbye");
         }
         catch (FileNotFoundException e) {
           e.printStackTrace();
@@ -89,14 +90,15 @@ public class cs310pa2
             if(scan.hasNextInt()) size=scan.nextInt(); else throw new IOException("size is not given");
             Point2D [] data=new Point2D[size];
 
-            int id=0;
-            while(scan.hasNextDouble())
+            for(int id=0;id<size;id++)
             {
               double x, y;
-              x=scan.nextDouble();
+              if(scan.hasNextDouble()) x=scan.nextDouble();
+              else throw new IOException("X value is not given");
+
               if(scan.hasNextDouble()) y=scan.nextDouble();
               else throw new IOException("Y value is not given");
-              data[id++]=new Point2D(x,y);
+              data[id]=new Point2D(x,y);
             }
 
             return data;
