@@ -285,7 +285,7 @@ Print the points in sorted order. That is, sort the points by x coordinates in a
 ## Examples
 
 ```
-> java rtree input_file.txt
+> java cs310pa2 input_file.txt
 Read in 10 points
 Query: 0.25 0.75 0.25 0.75 
 Found 1 point
