@@ -149,7 +149,7 @@ We can perform the 2D range query similarly by only visiting the associated bina
 ### Pseudo code for 2D Range search
 
 ```java
-Build 2D Range Tree (20%)
+Build 2D Range Tree (15%)
 
 Input: A set P of 2-D points on the plane.
 Output: The root of 2-D range tree.
@@ -309,10 +309,11 @@ bye
 	- Build 1D Range Tree (20%)
 	- Find the split node (10%)
 	- 1D Range Search (25%)
-- 2D Range search (45%)
-	- Build 2D Range Tree (20%)
+- 2D Range search (40%)
+	- Build 2D Range Tree (15%)
 	- 1D Range Search (25%)
-	
+- README.txt (5%)
+
 ## Rules
 
 ### You must
@@ -320,7 +321,7 @@ bye
 1. Have a style (indentation, good variable names, etc.)
 2. Comment your code well in JavaDoc style (no need to overdo it, just do it well)
 3. Have code that compiles with the command: javac *.java in your user directory
-4. **Print regions to terminal by size, large to small**
+4. **Print points to terminal sorted by their x coordinates. If multiple points have same x coordinate, sort them by y coordinates**
 
 ### You may 
 
