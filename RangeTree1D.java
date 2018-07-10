@@ -7,17 +7,111 @@ public class RangeTree1D<T>
   //Task 1: this is Build1DRangeTree(P) (20 pts)
   public Node<T> build( T [] data_array)
   {
-    //your code here.
 
-    return null;
-  }
+    //declarations
+    T [] P_left;
+    T [] P_right;
+    Node<T> v = new Node<T>();
+
+    if(data_array.length>=2)
+    {
+
+      boolean switched;
+
+      do {
+        switched = false;
+        for(int i=0; i<data_array.length-1;i++)
+        {
+          if(comp.compare(data_array[i],data_array[i+1])>=1)
+          {
+            T temp = data_array[i];
+            data_array[i] = data_array[i+1];
+            data_array[i+1] = temp;
+            switched = true;
+          }
+        }
+      }while(switched==true);
+
+    }//end of sorting if the array has at least 2 elements.
+
+
+
+
+    if(data_array.length==1)
+    {
+        v.data = data_array[0];
+    }
+    else
+    {
+      if(data_array.length%2==0)
+      {
+        Node<T> x_mid = new Node<T>();
+        x_mid.data = data_array[data_array.length/2-1];
+        P_left = (T[]) new Object[data_array.length/2];
+        P_right = (T[]) new Object[data_array.length - data_array.length/2];
+
+        for(int i =0;i<P_left.length;i++)
+        {
+          P_left[i] = data_array[i];
+        }
+        for(int i =0;i<P_right.length;i++)
+        {
+          P_right[i] = data_array[data_array.length/2+i];
+        }
+      }
+      else
+      {
+        Node<T> x_mid = new Node<T>();
+        x_mid.data = data_array[data_array.length/2];
+        P_left = (T[]) new Object[data_array.length/2+1];
+        P_right = (T[]) new Object[data_array.length - (data_array.length/2+1)];
+
+        for(int i =0;i<P_left.length;i++)
+        {
+          P_left[i] = data_array[i];
+        }
+        for(int i =0;i<P_right.length;i++)
+        {
+          P_right[i] = data_array[data_array.length/2+i+1];
+        }
+
+      }
+      Node<T> vleft = new Node<T>();
+      Node<T> vright = new Node<T>();
+
+
+      vleft = build( P_left);
+      vright = build( P_right);
+
+      v.left = vleft;
+      v.right = vright;
+    }
+
+    return v;
+
+  }//end of build method
+
+
 
   //Task #2: FindSplitNode(x, x')
   //Method to find the split node.
   protected Node<T> FindSplitNode( Range range)
   {
-    return null;
-  }
+    Node<T> v = new Node<T>();
+    v= root;
+    while( (v.isleaf == false)  && (max <= v.data*min || min > v.data*min))
+    {
+      if(max <= min*max)
+      {
+        v = v.left; // left child of the node v
+      }
+      else
+      {
+        v = v.right; // right child of the node v
+      }
+    }
+    return v;
+  }//end fo FindSplitNode Method
 
   //Method to make range and call search.
   //Do NOT CHANGE THIS FUNCTION
