@@ -36,11 +36,11 @@ public class RangeTree1D<T>
 
     }//end of sorting if the array has at least 2 elements.
 
-for(int i =0 ; i< data_array.length; i++)
-{
-  System.out.println(data_array[i]);
-}
-System.out.println("----------");
+// for(int i =0 ; i< data_array.length; i++)
+// {
+//   System.out.println(data_array[i]);
+// }
+// System.out.println("----------");
 
     if(data_array.length==1)
     {
@@ -103,12 +103,36 @@ System.out.println("----------");
   {
     Node<T> v = new Node<T>();
     v= this.root;
+
+    /*
     if(v.data==null)
     {
 
       System.out.println("hello root is null");
     }
     System.out.println("---" + (Double)v.data);
+
+    System.out.println("---" + (Double)v.left.data);
+    System.out.println("---" + (Double)v.right.data);
+
+    System.out.println("---" + (Double)v.left.left.data);
+    System.out.println("---" + (Double)v.left.right.data);
+    System.out.println("---" + (Double)v.right.left.data);
+    System.out.println("---" + (Double)v.right.right.data);
+    System.out.println("-----------------------------" );
+
+    System.out.println("---" + (Double)v.left.left.left.data);
+    System.out.println("---" + (Double)v.left.left.right.data);
+
+    System.out.println("---" + (Double)v.left.right.left.data);
+    System.out.println("---" + (Double)v.left.right.right.data);
+
+    System.out.println("---" + (Double)v.right.left.left.data);
+    System.out.println("---" + (Double)v.right.left.right.data);
+    System.out.println("---" + (Double)v.right.right.left.data);
+    System.out.println("---" + (Double)v.right.right.right.data);
+*/
+
 
 
 
@@ -155,7 +179,9 @@ System.out.println("----------");
       if(((Double)vsplit.data<=(Double)query.max) && ((Double)vsplit.data>=(Double)query.min))
       {
         reportSubTree(vsplit, l);
+
       }
+        System.out.println("leafyyyy" );
     }
     else
     {
@@ -168,16 +194,19 @@ System.out.println("----------");
         {
           reportSubTree(v.right,l);
           v = v.left;
+          System.out.println("xxx" );
         }
         else
         {
           v = v.right;
+          System.out.println("yy" );
         }
       }
       //check if the point stored at leasf v must be reported
       if(((Double)v.data<=(Double)query.max) && ((Double)v.data>=(Double)query.min))
       {
         reportSubTree(v, l);
+        System.out.println("zz" + v.data);
       }
 
 
@@ -186,16 +215,18 @@ System.out.println("----------");
 
       //follow the path to x' and report the points in subtrees left of the path
       v = vsplit.right;
-      while(v.is_leaf())
+      while(v.is_leaf()==false)
       {
         if((Double)query.max >= (Double)v.data)
         {
-          reportSubTree(v.right, l);
+          reportSubTree(v.left, l);
+          v = v.right;
         }
         else
         {
           v = v.left;
         }
+        System.out.println("sdf");
       }
       if(((Double)v.data<=(Double)query.max) && ((Double)v.data>=(Double)query.min))
       {

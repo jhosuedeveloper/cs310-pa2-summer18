@@ -8,6 +8,13 @@ public class RangeTree2D<T> extends RangeTree1D<T>
   // Build 2D Range Tree (15 pts)
   public Node<T> build( T [] data_array)
   {
+    if(data_array.length==1)
+    {
+      Node<T> v = new Node<T>();
+      
+    }
+    RangeTree1D<T> x = new RangeTree1D<T>();
+
     return null;
   }
 
