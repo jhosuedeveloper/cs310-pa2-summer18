@@ -9,8 +9,10 @@ public class RangeTree1D<T>
   {
 
     //declarations
-    T [] P_left;
-    T [] P_right;
+    T []P_left;
+    T []P_right;
+    Node<T> x_mid = new Node<T>();
+
     Node<T> v = new Node<T>();
 
     if(data_array.length>=2)
@@ -34,8 +36,11 @@ public class RangeTree1D<T>
 
     }//end of sorting if the array has at least 2 elements.
 
-
-
+for(int i =0 ; i< data_array.length; i++)
+{
+  System.out.println(data_array[i]);
+}
+System.out.println("----------");
 
     if(data_array.length==1)
     {
@@ -45,8 +50,8 @@ public class RangeTree1D<T>
     {
       if(data_array.length%2==0)
       {
-        Node<T> x_mid = new Node<T>();
         x_mid.data = data_array[data_array.length/2-1];
+        //@SuppressWarnings("unchecked")
         P_left = (T[]) new Object[data_array.length/2];
         P_right = (T[]) new Object[data_array.length - data_array.length/2];
 
@@ -61,7 +66,6 @@ public class RangeTree1D<T>
       }
       else
       {
-        Node<T> x_mid = new Node<T>();
         x_mid.data = data_array[data_array.length/2];
         P_left = (T[]) new Object[data_array.length/2+1];
         P_right = (T[]) new Object[data_array.length - (data_array.length/2+1)];
@@ -82,7 +86,7 @@ public class RangeTree1D<T>
 
       vleft = build( P_left);
       vright = build( P_right);
-
+      v = x_mid;
       v.left = vleft;
       v.right = vright;
     }
@@ -98,10 +102,19 @@ public class RangeTree1D<T>
   protected Node<T> FindSplitNode( Range range)
   {
     Node<T> v = new Node<T>();
-    v= root;
-    while( (v.isleaf == false)  && (max <= v.data*min || min > v.data*min))
+    v= this.root;
+    if(v.data==null)
     {
-      if(max <= min*max)
+
+      System.out.println("hello root is null");
+    }
+    System.out.println("---" + (Double)v.data);
+
+
+
+    while( (v.is_leaf() == false)  && ((Double)range.max <= (Double)v.data || (Double)range.min > (Double)v.data))
+    {
+      if((Double)range.max <= (Double)v.data)
       {
         v = v.left; // left child of the node v
       }
@@ -110,6 +123,10 @@ public class RangeTree1D<T>
         v = v.right; // right child of the node v
       }
     }
+
+
+
+
     return v;
   }//end fo FindSplitNode Method
 
@@ -129,14 +146,78 @@ public class RangeTree1D<T>
   //
   public void Search1D(Range query, IterableLinkedList<T> l)
   {
-    //your code here
-  }
+    Node<T> vsplit = new Node<T>();
+
+    vsplit = FindSplitNode(query);
+
+    if(vsplit.is_leaf())
+    {
+      if(((Double)vsplit.data<=(Double)query.max) && ((Double)vsplit.data>=(Double)query.min))
+      {
+        reportSubTree(vsplit, l);
+      }
+    }
+    else
+    {
+      //follow the path to x and report the points in subtrees riht of the path
+      Node<T> v = new Node<T>();
+      v = vsplit.left;
+      while(v.is_leaf() ==false)
+      {
+        if((Double)query.min <= (Double)v.data )
+        {
+          reportSubTree(v.right,l);
+          v = v.left;
+        }
+        else
+        {
+          v = v.right;
+        }
+      }
+      //check if the point stored at leasf v must be reported
+      if(((Double)v.data<=(Double)query.max) && ((Double)v.data>=(Double)query.min))
+      {
+        reportSubTree(v, l);
+      }
+
+
+
+
+
+      //follow the path to x' and report the points in subtrees left of the path
+      v = vsplit.right;
+      while(v.is_leaf())
+      {
+        if((Double)query.max >= (Double)v.data)
+        {
+          reportSubTree(v.right, l);
+        }
+        else
+        {
+          v = v.left;
+        }
+      }
+      if(((Double)v.data<=(Double)query.max) && ((Double)v.data>=(Double)query.min))
+      {
+        reportSubTree(v, l);
+      }
+
+
+
+
+
+    }//end of big else
+
+  }// end of RangeSearch_1D function
 
   //change this function to test your 1D range search locally
   //make sure you have this class working before moving to RangeTree2D
   public static void main(String [] args)
   {
     //your test code here
+
+
+
     class NC implements Comparator<Double> {
       public int compare(Double o1, Double o2){
         Double r=o1-o2;
@@ -145,11 +226,10 @@ public class RangeTree1D<T>
         else return 0;
       }
     }
-
     //
     RangeTree1D<Double> RT1D=new RangeTree1D<>(new NC());
     Double [] data={2.0,7.0,3.0,4.0,5.0,6.0,1.0,8.0,9.0,10.0};
-    RT1D.build(data);
+    RT1D.root = RT1D.build(data);
     Double min=3.5, max=7.99;
     IterableLinkedList<Double> result=RT1D.Search1D(min, max);
     result.sort(new NC());
@@ -158,7 +238,7 @@ public class RangeTree1D<T>
     {
       System.out.println(v);
     }
-  }
+  } // end of test main
 
   //
   // !!! DO NOT CHANGE ANYTHING BELOW !!!
